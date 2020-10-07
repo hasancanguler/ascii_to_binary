@@ -1,10 +1,10 @@
 #include <iostream>
 char charK;
 int intK;
-int ikiUs[8]={1,2,4,8,16,32,64,128};
 int ext[8];
 int *bin(int inchar);
 bool cont();
+const int ikiUs[8]={1,2,4,8,16,32,64,128};
 int main()
 {
     int *val;
@@ -28,16 +28,18 @@ int *bin(int inchar)
     //Calculating binary equivalent
     for (int i = 7; i >-1; i--)
     {
+        //When calculation ends (inchar=0), loop will be ignored
+        if (inchar==0)
+        {
+        ext[7-i]=0;
+        continue;
+        }
         int temp;
         temp=(inchar%ikiUs[i]);
         if (temp!=inchar)
-        {
-            ext[7-i]=1;
-        }
+        ext[7-i]=1;
         else if (temp=inchar)
-        {
-            ext[7-i]=0;
-        }
+        ext[7-i]=0;
         inchar=temp;
     }
     //Returning the array
@@ -50,8 +52,6 @@ bool cont()
     std::cout<<"Do you want to continue? (Y/N)";
     std::cin>>go;
     if (go=='y')
-    {
-        return true;
-    }
+    return true;
     return false;
 }
